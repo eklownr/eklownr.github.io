@@ -15,6 +15,7 @@
 <body>
     <h1>Eklöw brewing assistant</h1>
   <script>  "use strict";
+  // Analog Clock
     const cx = 100, cy = 100;  // Radius
     const _clockstyle = "width: " + (2 * cx) + "px;  height: " + (2 * cy) + "px;"
       + "border: 7px solid #282828; background: #585858;"
@@ -56,6 +57,8 @@
     drawClock()
     setInterval(drawClock, 1000)
   </script>
+
+  <!-- TODO: Add a timer -->
     <h2>ToDo List</h2>
     <ul id="todo-list">
         <li onclick="toggleCompleted(this)">Värm vatten</li>
@@ -72,7 +75,8 @@
         <li onclick="toggleCompleted(this)">Värm vörten till kok, skumma av</li>
         <li onclick="toggleCompleted(this)">Starta timer och koka i 60 min</li>
         <li onclick="toggleCompleted(this)">Tillsätt humle, koka i 60 min för att få beska</li>
-        <li onclick="toggleCompleted(this)">Efter kok. Whirlpool vänta tills den stannat</li>
+        <li onclick="toggleCompleted(this)">ca 10 min kvar av koket Tillsätt Protaflock och ev mer humle</li>
+        <li onclick="toggleCompleted(this)">Efter kok. Ev mer humle. Whirlpool vänta tills den stannat</li>
         <li onclick="toggleCompleted(this)">Kyl värten</li>
         <li onclick="toggleCompleted(this)">Tillsätt Jästen</li>
         <li onclick="toggleCompleted(this)">Jäs ca 2 veckor</li>
