@@ -93,7 +93,7 @@
     </script>
 
 
-<h2>Timer</h2>
+<h2>60 min Timer</h2>
 <p id="timer">60:00</p>
 <button id="startStopButton" onclick="startStopTimer()">Start/Stop</button>
 <button id="resetButton" onclick="resetTimer()">Reset</button>
@@ -149,7 +149,8 @@
 
     <script>
         function calculate_water_volume(OG, new_OG, vol) {
-            return (OG - new_OG) * vol / (new_OG - 1000);
+            let wv = (OG - new_OG) * vol / (new_OG - 1000);
+            return wv.toFixed(2);
         }
 
         function calculate() {
@@ -177,7 +178,8 @@
 
     <script>
         function calculate_alk(og, fg) {
-            return (og - fg) * 0.132;
+            let vol = (og - fg) * 0.132;
+            return vol.toFixed(2);
         }
 
         function calculateAlk() {
