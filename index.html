@@ -46,7 +46,7 @@
 
       // draw hands
       let t = new Date();  // get time
-      tick("#61afff", 5, t.getHours() * 30, 50)  // hour
+      tick("#61afff", 5, (t.getHours() + t.getMinutes() / 60) * 30, 50)  // hour
       tick("#71afff", 2, t.getMinutes() * 6, 70)  // min
       tick("#ee791a", 2, t.getSeconds() * 6, 80)  // s
 
