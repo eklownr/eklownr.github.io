@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://efpage.de/DML/DML_homepage/lib/DML-min.js"></script>
+
+<link rel="stylesheet" href="topNav.css"> 
+<link rel="stylesheet" href="main.css"> 
+
+<style>
+    .completed {
+        color: gray;
+        text-decoration: line-through;
+    }
+</style>
+    <title>EBA</title>
+</head>
+
+<div class="topnav">
+    <a class="active" href="index.html">&#x2615;</a>
+    <a href="beer_todo_list.html">Beer todo list</a>
+    <a href="procent_malt.html">Malt calulator</a>
+    <a href="games.html">My Games</a>
+    <a href="contact.html">Contact</a>
+</div>
+
+<body>
+    <h1>Eklöw brewing assistant</h1>
+  <script>  "use strict";
+  // Analog Clock
+    const cx = 100, cy = 100;  // Radius
+    const _clockstyle = "width: " + (2 * cx) + "px;  height: " + (2 * cy) + "px;"
+      + "border: 7px solid #282828; background: #585858;"
+      + "border-radius: 50%; margin: 50px;"
+      + "box-shadow: -4px -4px 10px rgba(67,67,67,0.5), inset 4px 4px 10px rgba(0,0,0,0.5),"
+      + "inset -4px -4px 10px rgba(67,67,67,0.5), 4px 4px 10px rgba(0,0,0,0.3);"
+
+    sidiv("", _clockstyle)
+    let c = canvas2D({ width: px(2 * cx), height: px(2 * cy) })
+    c.ctx.lineCap = "round"
+    unselectBase()
+
+    // Paint anything radial
+    function tick(color, width, angle, length, innerlength = 0) {
+      function ls(length) { return length * Math.sin(angle / 180.0 * Math.PI) }
+      function lc(length) { return -length * Math.cos(angle / 180.0 * Math.PI) }
+      c.setLineType(width, color)
+      c.line(cx + ls(innerlength), cy + lc(innerlength), cx + ls(length), cy + lc(length))
+    }
+
+    // Draw clock
+    function drawClock() {
+      c.clear()
+      // Draw ticks
+      for (let i = 0; i < 360; i += 30)
+        if ((i % 90) == 0) tick("#1df52f", 5, i, 88, 70)
+        else tick("#bdbdcb", 3, i, 88, 75)
+
+      // draw hands
+      let t = new Date();  // get time
+      tick("#61afff", 5, (t.getHours() + t.getMinutes() / 60) * 30, 50)  // hour
+      tick("#71afff", 3, t.getMinutes() * 6, 70)  // min
+      tick("#ee791a", 2, t.getSeconds() * 6, 80)  // s
+
+      // drwa center
+      c.setFillStyle("#4d4b63")
+      c.circle(cx, cy, 10, { fill: true })
+    }
+    drawClock()
+    setInterval(drawClock, 1000)
+  </script>
+
+  <!-- TODO: Add a timer -->
+    <h2>ToDo List</h2>
+    <ul id="todo-list">
+        <li onclick="toggleCompleted(this)">Värm vatten</li>
+        <li onclick="toggleCompleted(this)">Tillsätt salter</li>
+        <li onclick="toggleCompleted(this)">Väg upp malten</li>
+        <li onclick="toggleCompleted(this)">Väg upp humlen</li>
+        <li onclick="toggleCompleted(this)">Krossa malten</li>
+        <li onclick="toggleCompleted(this)">Kontrollera att vattnet håller ca 70 grader</li>
+        <li onclick="toggleCompleted(this)">Mäska in (blanda vatten och malt)</li>
+        <li onclick="toggleCompleted(this)">Starta timer på 60 min</li>
+        <li onclick="toggleCompleted(this)">Starta recirkulation (se till att vörten ej är grumlig)</li>
+        <li onclick="toggleCompleted(this)">Tillsätt mjölksyra till lakvattnet (1 tsk till 20 liter)</li>
+        <li onclick="toggleCompleted(this)">Laka (samla upp vört för kok)</li>
+        <li onclick="toggleCompleted(this)">Värm vörten till kok, skumma av</li>
+        <li onclick="toggleCompleted(this)">Starta timer och koka i minst 60 min</li>
+        <li onclick="toggleCompleted(this)">Tillsätt humle, koka i 60 min för att få beska</li>
+        <li onclick="toggleCompleted(this)">ca 10 min kvar av koket: Tillsätt Protaflock, jästnäring och ev mer humle</li>
+        <li onclick="toggleCompleted(this)">Efter kok. Ev mer humle. Whirlpool vänta tills den stannat</li>
+        <li onclick="toggleCompleted(this)">Kyl vörten</li>
+        <li onclick="toggleCompleted(this)">Tillsätt Jästen</li>
+        <li onclick="toggleCompleted(this)">Jäs ca 2 veckor</li>
+    </ul>
+    
+    <script>
+      // Todo completion
+        function toggleCompleted(element) {
+            if (element.classList.contains('completed')) {
+                element.classList.remove('completed');
+            } else {
+                element.classList.add('completed');
+            }
+        }
+    </script>
+
+
+<h2>60 min Timer</h2>
+<p id="timer">60:00</p>
+<button id="startStopButton" onclick="startStopTimer()">Start/Stop</button>
+<button id="resetButton" onclick="resetTimer()">Reset</button>
+
+<script>
+  // 60 min TIMER
+  let timer;
+  let time = 60 * 60; // 60 minutes in seconds
+  let running = false;
+
+  function startStopTimer() {
+    if (running) {
+      clearInterval(timer);
+    } else {
+      timer = setInterval(updateTimer, 1000);
+    }
+    running = !running;
+  }
+
+  function updateTimer() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    document.getElementById("timer").innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    if (time <= 0) {
+      clearInterval(timer);
+      running = false;
+    } else {
+      time--;
+    }
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    time = 60 * 60;
+    running = false;
+    document.getElementById("timer").innerText = "00:00";
+  }
+</script>
+
+    <hr>
+    <h2>OG to New OG Calculator</h2>
+
+    <label for="OG">Original Gravity (OG):</label>
+    <input type="number" id="OG" value="1050"><br><br>
+    
+    <label for="new_OG">New Original Gravity (new OG):</label>
+    <input type="number" id="new_OG" value="1040"><br><br>
+    
+    <label for="volume">Volume:</label>
+    <input type="number" id="volume" value="20"><br><br>
+    
+    <button onclick="calculate()">Calculate</button>
+    
+    <p id="result">Output: ...</p>
+
+    <script>
+        function calculate_water_volume(OG, new_OG, vol) {
+            let wv = (OG - new_OG) * vol / (new_OG - 1000);
+            return wv.toFixed(2);
+        }
+
+        function calculate() {
+            const OG = document.getElementById("OG").value;
+            const new_OG = document.getElementById("new_OG").value;
+            const volume = document.getElementById("volume").value;
+
+            const water_volume = calculate_water_volume(OG, new_OG, volume);
+            const total_volume = parseFloat(volume) + parseFloat(water_volume);
+
+            document.getElementById("result").innerHTML = `Add ${water_volume} liters of water to get a new OG of ${new_OG} and a total volume of ${total_volume} liters.`;
+        }
+    </script>
+
+    <hr>
+    <h2>Alcohol volume %</h2>
+
+    <label for="og">OG:</label>
+    <input type="number" id="og" value="1050"><br><br>
+    
+    <label for="fg">FG:</label>
+    <input type="number" id="fg" value="1010"><br><br>
+    
+    <button onclick="calculateAlk()">Calculate vol %</button>
+
+    <script>
+        function calculate_alk(og, fg) {
+            let vol = (og - fg) * 0.132;
+            return vol.toFixed(2);
+        }
+
+        function calculateAlk() {
+            const og = document.getElementById("og").value;
+            const fg = document.getElementById("fg").value;
+            const alko = calculate_alk(og, fg);
+            document.getElementById("alk").innerHTML = `${alko} Vol %`;
+        }
+    </script>
+    <p id="alk">Output: Vol %</p>
+    <hr>
+    <h2>ToDo List in English</h2>
+    <ul id="todo-list">
+        <li onclick="toggleCompleted(this)">Heat water</li>
+        <li onclick="toggleCompleted(this)">Add salts</li>
+        <li onclick="toggleCompleted(this)">Weigh the malt</li>
+        <li onclick="toggleCompleted(this)">Weigh the hops</li>
+        <li onclick="toggleCompleted(this)">Crush the malt</li>
+        <li onclick="toggleCompleted(this)">Check that the water is around 70 degrees</li>
+        <li onclick="toggleCompleted(this)">Mash in (mix water and malt)</li>
+        <li onclick="toggleCompleted(this)">Start timer for 60 min</li>
+        <li onclick="toggleCompleted(this)">Start recirculation (ensure wort is clear/not cloudy)</li>
+        <li onclick="toggleCompleted(this)">Add lactic acid to sparge water (1 tsp for 20 liters)</li>
+        <li onclick="toggleCompleted(this)">Sparge (collect wort for boiling)</li>
+        <li onclick="toggleCompleted(this)">Heat wort to boil, skim off</li>
+        <li onclick="toggleCompleted(this)">Start timer and boil for 60 min</li>
+        <li onclick="toggleCompleted(this)">Add hops, boil for 60 min to get bitterness</li>
+        <li onclick="toggleCompleted(this)">After boil. Whirlpool, wait until it stops</li>
+        <li onclick="toggleCompleted(this)">Cool the wort</li>
+        <li onclick="toggleCompleted(this)">Add the yeast</li>
+        <li onclick="toggleCompleted(this)">Ferment for about 2 weeks</li>
+    </ul>
+</body>
+</html>
