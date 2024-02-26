@@ -1,0 +1,32 @@
+/* Top navigation fixed on top when scrolling*/
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    outline: solid 1px chartreuse;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 6px 9px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #fba12d;
+    color: black;
+  }
+  
+  /* Add a color to the active/current link 
+  .topnav a.active {
+    background-color: #3b8b10;
+    color: white;
+  }
+*/
