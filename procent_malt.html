@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Malt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <script>
+
+let maltCounter = 1;
+let totalGrams = 0;
+
+function addMaltInput() {
+    maltCounter++;
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.id = `malt_sort_${maltCounter}`;
+    newInput.name = 'malt_sort';
+    newInput.value = 'Maltsort';
+    newInput.oninput = updateTotalGrams;
+
+    const gram = document.createElement('input');
+    gram.type = 'number';
+    gram.id = `gram_${maltCounter}`;
+    gram.name = 'gram';
+    gram.value = '0';
+    gram.oninput = updateTotalGrams;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.innerText = 'Ny rad';
+    button.onclick = addMaltInput;
+
+    const lineBreak = document.createElement('br'); 
+    const lineLabel = document.createTextNode(`Rad ${maltCounter}: `);
+    const space = document.createTextNode(' ');
+    const percent = document.createElement('span');
+    percent.id = `percent_${maltCounter}`;
+
+    const form = document.getElementById('malt_form');
+
+    form.appendChild(lineLabel);
+    form.appendChild(newInput);
+    form.appendChild(space);
+    form.appendChild(gram);
+    form.appendChild(percent);
+    form.appendChild(lineBreak);
+}
+
+function updateTotalGrams() {
+    totalGrams = 0;
+
+    for(let i = 1; i <= maltCounter; i++) {
+        const gramField = document.getElementById(`gram_${i}`);
+        if(gramField.value !== '') {
+            totalGrams += parseFloat(gramField.value);
+        }
+    }
+
+    for(let i = 1; i <= maltCounter; i++) {
+        const gramField = document.getElementById(`gram_${i}`);
+        const percentField = document.getElementById(`percent_${i}`);
+        if(gramField.value !== '') {
+            const percent = parseFloat(gramField.value) / totalGrams * 100;
+            percentField.innerText = ` : ${percent.toFixed(2)}%`;
+        } else {
+            percentField.innerText = '';
+        }
+    }
+}
+</script>
+
+<h1>Lägg till Maltsorter och vikt</h1>
+<form id="malt_form">
+    <button type="button" onclick="addMaltInput()">Ny rad</button><br>
+    <label for="malt_form">Rad 1: </label>
+    <input type="text" id="malt_sort_1" name="malt_sort" value="Maltsort" oninput="updateTotalGrams()">
+    <input type="number" id="gram_1" name="gram" value="0" oninput="updateTotalGrams()">
+    <span id="percent_1"></span>
+    <br>
+</form>
+
+</body>
+</html>
