@@ -1,0 +1,85 @@
+.bg-color {
+    background-color: #282c34;
+    color: #f2f2f2;
+  }
+  
+  body {
+    background-color: #282c34;
+    color: #f2f2f2;
+  }
+  
+  .block {
+    padding: 6px 9px;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    width: auto;
+    height: 2800px;
+    outline: solid 1px chartreuse;
+    background-color: #333;
+    text-align: left;
+  }
+  
+  .block_grey{
+    background-color: #303643;
+    color: #f2f2f2;
+    border-color: #000000;
+    margin-left: 0%;
+  }
+  
+  h2 {
+    background-color: #282c34;
+    color: #f2f2f2;
+  }
+  
+  p {
+    color: #f2f2f2;
+  }
+  
+  h1 {
+    padding: 4px;
+    margin: 4px;
+  }
+  
+  a {
+  color: #3b8b10;
+  }
+  
+  .App {
+    text-align: center;
+    background-color: #282c34;
+  }
+  
+  .App-body {
+    background-color: #282c34;
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 49%;
+    padding: 4px;
+  }
+  
+  /* Clear floats after the columns */
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
