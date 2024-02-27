@@ -50,7 +50,7 @@ function addMaltInput() {
     button.onclick = addMaltInput;
 
     const lineBreak = document.createElement('br'); 
-    const lineLabel = document.createTextNode(`Rad ${maltCounter}: `);
+    const lineLabel = document.createTextNode(`${maltCounter}: `);
     const space = document.createTextNode(' ');
     const percent = document.createElement('span');
     percent.id = `percent_${maltCounter}`;
@@ -91,7 +91,7 @@ function updateTotalGrams() {
 <h1>Lägg till Maltsorter och vikt</h1>
 <form id="malt_form">
     <button type="button" onclick="addMaltInput()">Ny rad</button><br>
-    <label for="malt_form">Rad 1: </label>
+    <label for="malt_form">1: </label>
     <input type="text" id="malt_sort_1" name="malt_sort" value="Maltsort" oninput="updateTotalGrams()">
     <input type="number" id="gram_1" name="gram" value="0" oninput="updateTotalGrams()">
     <span id="percent_1"></span>
