@@ -1,11 +1,12 @@
 body {
     color: #d5cafe;
     background-color: #000;
+    font-size: large;
 }
 .container {
     display: flex;
   }
   .right-element {
-    margin-left: auto;
+    margin-left: 20px;
   }
   
