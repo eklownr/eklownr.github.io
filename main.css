@@ -1,19 +1,13 @@
 .bg-color {
-    background-color: #282c34;
+    background-color: #22242a;
     color: #f2f2f2;
   }
   
   body {
-    background-color: #282c34;
-    color: #f2f2f2;
+    background-color: #15171a;
+    color: #d6cbff;
   }
 
-.container {
-    display: flex;
-  }
-  .right-element {
-    margin-left: 20px;
-  }
 
   .block {
     padding: 6px 9px;
@@ -41,7 +35,7 @@
   }
   
   p {
-    color: #f2f2f2;
+    color: #d6cbff;
   }
   
   h1 {
@@ -139,3 +133,11 @@
     width: 50px;
   }
   
+.container {
+    display: flex;
+  }
+  .right-element {
+    margin-left: 20px;
+    color: #d6cbff;
+    font-size: large;
+  }
