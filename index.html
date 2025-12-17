@@ -36,7 +36,7 @@
         </p>
         <p>
             I had my own brewery for about 9 years, 
-            which I started in 2012 and released about 20 beers on the Swedish Systembolaget.
+            and released about 20 beers on the Swedish Systembolaget.
         </p>
         <p>
             I like open source and use Linux most of the time.
@@ -44,5 +44,27 @@
     </div>
 </div>
 
+<div>
+    <p class="web"></p>
+</div>
+
+<script>
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => console.log('Your public IP address is:', data.ip));   
+
+    navigator.userAgentData.getHighEntropyValues(["platform", "model"]).then(ua => {
+    console.log(`Plattform: ${ua.platform}, Mobil: ${ua.mobile}, Modell: ${ua.model}`);
+    });   
+
+    navigator.userAgentData.getHighEntropyValues([
+    "brands", "platform", "architecture", "model", "platformVersion"
+    ]).then(console.log);   
+
+//    if (navigator.userAgentData && navigator.userAgentData.brands.length > 0) {
+//    const browserName = navigator.userAgentData.brands[0].brand;
+//    document.querySelector('.web').textContent = `Your browser is: ${browserName}`;
+//    }   
+</script>
 </body>
 </html>
