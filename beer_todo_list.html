@@ -207,5 +207,84 @@
         <li onclick="toggleCompleted(this)">Add the yeast</li>
         <li onclick="toggleCompleted(this)">Ferment for about 2 weeks</li>
     </ul>
+
+
+<script>
+
+let maltCounter = 1;
+let totalGrams = 0;
+
+function addMaltInput() {
+    maltCounter++;
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.id = `malt_sort_${maltCounter}`;
+    newInput.name = 'malt_sort';
+    newInput.value = 'malt variety';
+    newInput.oninput = updateTotalGrams;
+
+    const gram = document.createElement('input');
+    gram.type = 'number';
+    gram.id = `gram_${maltCounter}`;
+    gram.name = 'gram';
+    gram.value = '0';
+    gram.oninput = updateTotalGrams;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.innerText = 'Ny rad';
+    button.onclick = addMaltInput;
+
+    const lineBreak = document.createElement('br'); 
+    const lineLabel = document.createTextNode(`${maltCounter}: `);
+    const space = document.createTextNode(' ');
+    const percent = document.createElement('span');
+    percent.id = `percent_${maltCounter}`;
+
+    const form = document.getElementById('malt_form');
+
+    form.appendChild(lineLabel);
+    form.appendChild(newInput);
+    form.appendChild(space);
+    form.appendChild(gram);
+    form.appendChild(percent);
+    form.appendChild(lineBreak);
+}
+
+function updateTotalGrams() {
+    totalGrams = 0;
+
+    for(let i = 1; i <= maltCounter; i++) {
+        const gramField = document.getElementById(`gram_${i}`);
+        if(gramField.value !== '') {
+            totalGrams += parseFloat(gramField.value);
+        }
+    }
+
+    for(let i = 1; i <= maltCounter; i++) {
+        const gramField = document.getElementById(`gram_${i}`);
+        const percentField = document.getElementById(`percent_${i}`);
+        if(gramField.value !== '') {
+            const percent = parseFloat(gramField.value) / totalGrams * 100;
+            percentField.innerText = ` : ${percent.toFixed(2)}%`;
+        } else {
+            percentField.innerText = '';
+        }
+    }
+}
+</script>
+
+<hr>
+<h1>Add malt variety and weight</h1>
+<p>Calculate percentage</p>
+<form id="malt_form">
+    <button type="button" onclick="addMaltInput()">New line</button><br>
+    <label for="malt_form">1: </label>
+    <input type="text" id="malt_sort_1" name="malt_sort" value="malt variety" oninput="updateTotalGrams()">
+    <input type="number" id="gram_1" name="gram" value="0" oninput="updateTotalGrams()">
+    <span id="percent_1"></span>
+    <br>
+</form>
+<hr>
 </body>
 </html>
