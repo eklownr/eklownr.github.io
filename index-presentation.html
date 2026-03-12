@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <link rel="icon" href="image.png" type="image/x-icon">   
+    <title>Eklow</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="main.css"> 
+</head>
+<body>
+
+<h1 align="center">Welcome</h1>
+<div class="container">
+    <div><img src="jag.jpeg" alt="eklow">
+    <p>Self-portrait in acrylic</p>
+    </div>
+    <div class="right-element">
+        <p> Hello! A short introduction, I'm eklow and live in Bålsta about 35 km from Stockholm.</p>
+        <p> 
+        </p>
+        <p>
+            I have too many interests... <br>
+            I play guitar in a band.
+            I create music, brew my own beer, <br>
+            paints watercolor, acrylic and oil paint. <br>
+            Create games, grow tomatoes and bake bread. <br>
+            Create and build my own furniture, built 2 acoustic guitars, rebuilt my house... and so on.
+        </p>
+        <p>
+           I like open source and use Linux mostly.<br>
+            And really like learning new things, programming languages ​​like Python and Go.<br>
+            Wrote a small game in Go in January to March 2024, just to learn the language.
+        </p> 
+        <h3>Fun fact</h3>
+        <p>At one time I hade my oilpainting inside ICA Bålsta</p>
+        <img src="tavlor.webp" alt="balsta">
+        <p>
+            I had my own brewery for about 9 years, 
+            and released about 20 beers on the Swedish Systembolaget.
+        </p>
+        <a href="https://untappd.com/BalstaBryggeri">Bålsta Brygger Untappd</a><br>
+        <a href="https://www.youtube.com/watch?v=CivlXZGyXsM">One of our band's songs.</a>  
+    </div>
+</div>
+
+<div>
+    <p class="web"></p>
+</div>
+
+<script>
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => console.log('Your public IP address is:', data.ip));   
+
+    navigator.userAgentData.getHighEntropyValues(["platform", "model"]).then(ua => {
+    console.log(`Plattform: ${ua.platform}, Mobil: ${ua.mobile}, Modell: ${ua.model}`);
+    });   
+
+    navigator.userAgentData.getHighEntropyValues([
+    "brands", "platform", "architecture", "model", "platformVersion"
+    ]).then(console.log);   
+
+</script>
+</body>
+</html>
